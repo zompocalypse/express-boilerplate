@@ -11,9 +11,9 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
+app.use(cors());
 app.use(morgan(morganOption));
 app.use(helmet());
-app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello, world!');
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === 'production') {
-    response = { error: { message: 'server error' } };
+    response = { error: { message: 'Internal server error' } };
   } else {
     console.error(error);
     response = { message: error.message, error };
